@@ -70,6 +70,15 @@ Any time the agent wants to change this repo (including polishing skills), it mu
 - creating/pushing branches
 - pushing `main`
 
+### Fast Path For Repo-Doc Changes (No Branch)
+
+If the change is only repo meta / documentation (for example: `AGENTS.md`, `README.md`, or `docs/**`) and the user asks to "commit and push", prefer the simplest flow:
+
+1) commit directly on `main`
+2) push `main`
+
+Still ask permission before the push.
+
 ### Default Flow For Skill Polishing
 
 When the user grants permission to apply "Skill polish candidates":
