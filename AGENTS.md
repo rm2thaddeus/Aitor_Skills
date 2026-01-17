@@ -106,6 +106,11 @@ Any time the agent wants to change this repo (including polishing skills), it mu
 - creating/pushing branches
 - pushing `main`
 
+### Branch Requirement For Skills
+
+Any change under a skill folder (for example: `*/SKILL.md`, `*/scripts/**`, `*/references/**`, `*/assets/**`) must go through a branch.
+Do not push skill changes directly to `main` unless the user explicitly requests it for that specific change.
+
 ### Fast Path For Repo-Doc Changes (No Branch)
 
 If the change is only repo meta / documentation (for example: `AGENTS.md`, `README.md`, or `docs/**`) and the user asks to "commit and push", prefer the simplest flow:
