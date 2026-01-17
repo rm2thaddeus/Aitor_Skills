@@ -80,6 +80,7 @@ Maintain an in-memory list named **Skill polish candidates**. Each entry is a si
 
 Do not interrupt the main task to edit skills mid-flight unless the user explicitly asks to stop and refactor the skill now.
 Use the `skills-updater` skill to execute approved polish changes.
+Use the `skills-summarizer` skill to digest usage logs and propose upkeep.
 
 ### How To Propose Skill Updates (Final Message)
 

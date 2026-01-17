@@ -1,0 +1,51 @@
+{
+  "range": {
+    "days": 7,
+    "end_date": "2026-01-17",
+    "start_date": "2026-01-11"
+  },
+  "top_projects": [
+    {
+      "count": 11,
+      "project_repo_root": "C:/Users/aitor/.codex/skills"
+    }
+  ],
+  "top_skills": [
+    {
+      "count": 4,
+      "skill_name": "brainstorming",
+      "status_counts": {
+        "success": 4
+      }
+    },
+    {
+      "count": 4,
+      "skill_name": "doc-coauthoring",
+      "status_counts": {
+        "success": 4
+      }
+    },
+    {
+      "count": 2,
+      "skill_name": "git-pushing",
+      "status_counts": {
+        "success": 2
+      }
+    },
+    {
+      "count": 1,
+      "skill_name": "skill-creator",
+      "status_counts": {
+        "success": 1
+      }
+    }
+  ],
+  "totals": {
+    "invocations": 11,
+    "status_counts": {
+      "success": 11
+    },
+    "unique_projects": 1,
+    "unique_skills": 4
+  }
+}

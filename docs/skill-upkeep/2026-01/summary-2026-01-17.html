@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skill Usage Summary</title>
+  <style>
+    :root {
+      --bg: #f6f2ea;
+      --card: #fffdf8;
+      --ink: #1b1b1b;
+      --accent: #2f6f3f;
+      --muted: #6b6b6b;
+      --border: #e4d9c8;
+    }
+    body {
+      margin: 0;
+      font-family: "Georgia", "Times New Roman", serif;
+      background: radial-gradient(circle at 10% 10%, #efe6d7, var(--bg));
+      color: var(--ink);
+    }
+    main {
+      max-width: 980px;
+      margin: 32px auto;
+      padding: 0 20px 40px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+    }
+    .card h2 {
+      font-size: 1.1rem;
+      margin: 0 0 8px;
+    }
+    .stat {
+      font-size: 1.8rem;
+      color: var(--accent);
+      font-weight: bold;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Skill Usage Summary</h1>
+    <div class="subtitle">Range: 2026-01-11 to 2026-01-17 (7 days)</div>
+    <div class="grid">
+      <div class="card">
+        <h2>Total Invocations</h2>
+        <div class="stat">11</div>
+      </div>
+      <div class="card">
+        <h2>Unique Skills</h2>
+        <div class="stat">4</div>
+      </div>
+      <div class="card">
+        <h2>Unique Projects</h2>
+        <div class="stat">1</div>
+      </div>
+      <div class="card">
+        <h2>Status Breakdown</h2>
+        <ul><li>success: 11</li></ul>
+      </div>
+    </div>
+    <div class="grid" style="margin-top: 18px;">
+      <div class="card">
+        <h2>Top Skills</h2>
+        <ul><li>brainstorming: 4</li><li>doc-coauthoring: 4</li><li>git-pushing: 2</li><li>skill-creator: 1</li></ul>
+      </div>
+      <div class="card">
+        <h2>Top Projects</h2>
+        <ul><li>C:/Users/aitor/.codex/skills: 11</li></ul>
+      </div>
+      <div class="card">
+        <h2>Parsing Notes</h2>
+        <p>Invalid log lines skipped: 0</p>
+      </div>
+    </div>
+    <div class="footer">Metadata only. No prompts or user content captured.</div>
+  </main>
+</body>
+</html>
