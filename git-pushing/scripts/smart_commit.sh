@@ -102,7 +102,7 @@ if [ -z "$1" ]; then
 
     info "Generated commit message: $COMMIT_MSG"
 else
-    COMMIT_MSG="$1"
+    COMMIT_MSG="$*"
     info "Using provided message: $COMMIT_MSG"
 fi
 
