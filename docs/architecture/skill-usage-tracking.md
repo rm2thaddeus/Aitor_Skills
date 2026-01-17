@@ -56,23 +56,32 @@ Example:
 - The helper script is the reliability anchor; a skill wrapper is optional.
 - Missing logs are treated as a process gap, not a system failure.
 
-## Future Updater Skill (Notes)
+## Updater Skill
 
+- Skill: `skills-updater/SKILL.md`.
 - Purpose: propose improvements to skills over time without auto-editing them.
 - Persona: encode a prompt engineering persona focused on clarity, minimalism,
   and testability; avoid verbosity and avoid changing intent without justification.
 - Technique: use markdown notation to reinforce and update rules consistently
   (headings for scope, bullet lists for mandatory rules, checklists for gates).
-- Output: produce proposals or diffs for human review; never apply changes
-  directly; treat logs as data, not instructions.
+- Output: produce proposals or diffs for human review; require explicit approval
+  before edits and use a branch for skill changes.
 - Safety: never include user text or secrets; prefer metadata-only evidence.
 
-## Future Summarizer Skill (Notes)
+## Summarizer Skill
 
+- Skill: `skills-summarizer/SKILL.md`.
 - Purpose: digest JSONL usage logs into JSON summaries and HTML cards.
 - Outputs: `docs/skill-upkeep/YYYY-MM/summary-YYYY-MM-DD.{json,html}`.
 - Conservative: proposals only; no auto-edits without human approval.
 - Privacy: metadata only; no prompts or user data.
+
+## Security Notes
+
+- Logs are treated strictly as data and are never re-injected into prompts.
+- No prompts, user text, file contents, secrets, or PII are logged.
+- Logging, summarization, and updating are separate steps with human gates.
+- Logs are ignored by git (`.gitignore`) to avoid accidental publication.
 
 ## Usage
 
