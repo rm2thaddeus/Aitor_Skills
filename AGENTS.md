@@ -79,6 +79,7 @@ Maintain an in-memory list named **Skill polish candidates**. Each entry is a si
 - `<skill-name>`: 1 sentence "gap", 1 sentence "proposed fix" (include file path(s) when obvious).
 
 Do not interrupt the main task to edit skills mid-flight unless the user explicitly asks to stop and refactor the skill now.
+Use the `skills-updater` skill to execute approved polish changes.
 
 ### How To Propose Skill Updates (Final Message)
 
