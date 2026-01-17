@@ -33,6 +33,7 @@ See `docs/architecture/skill-usage-tracking.md` for the full flow.
 ## Roadmap
 
 - PRD: `docs/roadmap/PRD for self improving agents.pdf`
+- Skill telemetry roadmap: `docs/roadmap/skill-telemetry-roadmap.md`
 
 ## Structure
 
