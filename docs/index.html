@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aitor Skills - Self-Improving Skill System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;500;700&family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #0f1722;
+      --ink: #e7f0ff;
+      --muted: #92a2b6;
+      --accent: #22d3ee;
+      --accent-2: #f59e0b;
+      --grid: rgba(34, 211, 238, 0.08);
+      --line: rgba(231, 240, 255, 0.08);
+      --shadow: 0 18px 40px rgba(5, 9, 15, 0.6);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 15% 15%, #0e1a24 0%, #0b0f14 55%);
+      color: var(--ink);
+      font-family: "IBM Plex Mono", monospace;
+      overflow-x: hidden;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .scanline {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+    }
+
+    h1 {
+      font-family: "Oxanium", sans-serif;
+      font-size: clamp(2.6rem, 3vw + 1.4rem, 4rem);
+      margin: 18px 0 16px;
+      line-height: 1.1;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+    }
+
+    .cta {
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--accent);
+      color: var(--bg);
+      background: linear-gradient(120deg, var(--accent), #7dd3fc);
+      font-weight: 600;
+      text-decoration: none;
+      font-family: "Oxanium", sans-serif;
+      box-shadow: var(--shadow);
+    }
+
+    .cta.secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 12px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .hero-panel h3 {
+      font-family: "Oxanium", sans-serif;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    section {
+      margin-top: 44px;
+    }
+
+    .section-title {
+      font-family: "Oxanium", sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .loop {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .loop-card {
+      position: relative;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: linear-gradient(140deg, rgba(34, 211, 238, 0.08), transparent 60%);
+      min-height: 150px;
+    }
+
+    .loop-card span {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+    }
+
+    .loop-card h4 {
+      margin: 10px 0 8px;
+      font-family: "Oxanium", sans-serif;
+    }
+
+    .loop-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .links a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      color: var(--ink);
+      background: rgba(15, 23, 34, 0.8);
+    }
+
+    .links a strong {
+      display: block;
+      font-family: "Oxanium", sans-serif;
+      margin-bottom: 6px;
+    }
+
+    .security {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .security li {
+      margin-bottom: 8px;
+    }
+
+    .orbit {
+      position: absolute;
+      top: -40px;
+      right: -20px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px dashed rgba(34, 211, 238, 0.3);
+      animation: spin 18s linear infinite;
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.8);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      animation: floatIn 0.9s ease forwards;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        grid-template-columns: 1fr;
+      }
+      .orbit {
+        position: relative;
+        margin: 0 auto 12px;
+        right: auto;
+        top: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
+  <div class="container">
+    <header>
+      <div class="reveal">
+        <div class="badge">Self-improving skills</div>
+        <h1>Explore and improve skills as you go.</h1>
+        <p class="lead">
+          Aitor Skills is a Codex and Claude-first library that tracks usage,
+          summarizes behavior, and upgrades workflows through human-approved
+          proposals. It is designed to evolve without leaking prompts or user data.
+        </p>
+        <div class="cta-row">
+          <a class="cta" href="https://github.com/rm2thaddeus/Aitor_Skills">Explore skills</a>
+          <a class="cta secondary" href="roadmap/skill-telemetry-roadmap.md">Read the roadmap</a>
+        </div>
+      </div>
+      <div class="panel hero-panel reveal">
+        <div class="orbit" aria-hidden="true"></div>
+        <h3>Live loop</h3>
+        <p>Track -> Summarize -> Propose -> Approve. No silent edits.</p>
+        <p>Logs are metadata only. No prompts. No user text. No secrets.</p>
+      </div>
+    </header>
+
+    <section class="reveal">
+      <div class="section-title">Self-improvement loop</div>
+      <div class="loop">
+        <div class="loop-card">
+          <span>Step 01</span>
+          <h4>Track usage</h4>
+          <p>Daily JSONL telemetry with minimal metadata and zero user content.</p>
+        </div>
+        <div class="loop-card">
+          <span>Step 02</span>
+          <h4>Summarize</h4>
+          <p>Generate JSON + HTML upkeep cards for quick human review.</p>
+        </div>
+        <div class="loop-card">
+          <span>Step 03</span>
+          <h4>Propose</h4>
+          <p>Conservative changes only. No auto-edits without approval.</p>
+        </div>
+        <div class="loop-card">
+          <span>Step 04</span>
+          <h4>Approve</h4>
+          <p>Branch-first edits and explicit go/no-go gates.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-title">Security posture</div>
+      <div class="security">
+        <div class="panel">
+          <ul>
+            <li>Logs are data, never re-injected into prompts.</li>
+            <li>No prompts, user text, file contents, secrets, or PII.</li>
+            <li>Logging, summarization, and updates are separate steps.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <ul>
+            <li>Human approval required for skill edits.</li>
+            <li>Branch workflow for any skill change.</li>
+            <li>Future: integrity hashing and retention pruning.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-title">Start here</div>
+      <div class="links">
+        <a href="architecture/skill-usage-tracking.md">
+          <strong>Architecture</strong>
+          How telemetry and upkeep flow together.
+        </a>
+        <a href="roadmap/skill-telemetry-roadmap.md">
+          <strong>Roadmap</strong>
+          What is left from the PRD and why.
+        </a>
+        <a href="https://github.com/rm2thaddeus/Aitor_Skills/tree/main/skills-updater">
+          <strong>Updater skill</strong>
+          Review and apply improvements safely.
+        </a>
+        <a href="https://github.com/rm2thaddeus/Aitor_Skills/tree/main/skills-summarizer">
+          <strong>Summarizer skill</strong>
+          Digest telemetry into reports.
+        </a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
