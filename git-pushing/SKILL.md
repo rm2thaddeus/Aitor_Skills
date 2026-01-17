@@ -28,4 +28,9 @@ With custom message:
 bash skills/git-pushing/scripts/smart_commit.sh "feat: add feature"
 ```
 
+PowerShell + Git Bash (Windows) alternative:
+```bash
+COMMIT_MSG_OVERRIDE="feat: add feature" bash skills/git-pushing/scripts/smart_commit.sh
+```
+
 Script handles: staging, conventional commit message, Claude footer, push with -u flag.

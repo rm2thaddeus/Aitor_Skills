@@ -75,7 +75,10 @@ determine_scope() {
 }
 
 # Generate commit message if not provided
-if [ -z "$1" ]; then
+if [ -n "$COMMIT_MSG_OVERRIDE" ]; then
+    COMMIT_MSG="$COMMIT_MSG_OVERRIDE"
+    info "Using provided message: $COMMIT_MSG"
+elif [ -z "$1" ]; then
     COMMIT_TYPE=$(determine_commit_type "$STAGED_FILES")
     SCOPE=$(determine_scope "$STAGED_FILES")
 
