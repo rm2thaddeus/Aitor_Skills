@@ -22,6 +22,40 @@ Applies to all files under `C:/Users/aitor/.codex/skills`, including:
 - **Ask one question at a time** when a skill instructs that (common for design/brainstorming workflows).
 - **Be explicit about permission points** before proposing or performing git changes.
 
+## Skill Usage Tracking (JSONL)
+
+This repo uses best-effort usage logging to keep a lightweight, diffable record of skill usage without storing prompts or user data.
+
+### Where To Log
+
+Write one JSONL line per skill invocation to:
+
+`logs/skills/YYYY-MM/skill-usage-YYYY-MM-DD.jsonl`
+
+Create the directory path if it does not exist.
+
+Helper script: `scripts/log-skill-usage.ps1`
+
+### Required Fields
+
+- `timestamp`: ISO 8601 UTC timestamp (example: `2026-01-17T18:24:03Z`).
+- `skill_name`: skill name as invoked.
+- `skill_version`: from SKILL.md front matter when present, otherwise `unknown`.
+- `status`: `success`, `failure`, or `retries`.
+- `notes`: short, safe metadata only; no user text, file contents, secrets, or PII.
+- `project_repo_root`: nearest git repo root if detected, otherwise `null`.
+- `project_cwd`: current working directory.
+
+### Operational Rules
+
+- Log immediately before responding, or immediately after if the response must be first.
+- Do not log prompts, outputs, or any user-provided text.
+- If logging fails (e.g., file system error), say so in the response and continue.
+
+### Example JSONL Entry
+
+{"timestamp":"2026-01-17T18:24:03Z","skill_name":"doc-coauthoring","skill_version":"unknown","status":"success","notes":"stage 1 context gathering","project_repo_root":"C:/Users/aitor/.codex/skills","project_cwd":"C:/Users/aitor/.codex/skills"}
+
 ## Skill Polish Loop (Proactive Improvement)
 
 ### Intent
