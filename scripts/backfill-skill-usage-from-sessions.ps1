@@ -35,11 +35,17 @@ function Add-LogEntry($entry, [switch]$DryRun) {
   $entryJson = $entry | ConvertTo-Json -Compress
   $ts = [DateTime]::Parse($entry.timestamp).ToUniversalTime()
   $logFile = Get-LogPath -UtcTime $ts
+  $entryKey = "$($entry.timestamp)|$($entry.skill_name)"
+
+  if ($script:SeenKeys.ContainsKey($entryKey)) {
+    return
+  }
+  $script:SeenKeys[$entryKey] = $true
 
   if (Test-Path $logFile) {
     $existing = Get-Content -Path $logFile -ErrorAction SilentlyContinue
-    $key = "\"timestamp\":\"$($entry.timestamp)\""
-    $nameKey = "\"skill_name\":\"$($entry.skill_name)\""
+    $key = '"timestamp":"' + $entry.timestamp + '"'
+    $nameKey = '"skill_name":"' + $entry.skill_name + '"'
     if ($existing -match [regex]::Escape($key) -and $existing -match [regex]::Escape($nameKey)) {
       return
     }
@@ -74,6 +80,7 @@ function Assert-SafeNotes([string]$notes) {
 }
 
 $cutoff = (Get-Date).ToUniversalTime().AddDays(-$SinceDays)
+$script:SeenKeys = @{}
 $files = Get-ChildItem -Path $SessionsRoot -Recurse -Filter "rollout-*.jsonl" -File -ErrorAction SilentlyContinue |
   Where-Object { $_.Length -gt 0 -and $_.LastWriteTimeUtc -ge $cutoff }
 
@@ -114,7 +121,7 @@ foreach ($file in $files) {
 
     $projectCwd = if ($sessionCwd) { $sessionCwd } else { "" }
     $projectRepoRoot = if ($RepoRootOverride) { $RepoRootOverride } elseif ($projectCwd) { Get-RepoRoot $projectCwd } else { "" }
-    $notes = "auto: detected skill usage from session log"
+    $notes = "auto: detected skill usage from rollout log"
     if ($sessionId) { $notes = "$notes ($sessionId)" }
     Assert-SafeNotes $notes
 
