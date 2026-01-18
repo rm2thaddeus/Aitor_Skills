@@ -33,6 +33,14 @@ Applies to all files under `C:/Users/aitor/.codex/skills`, including:
 
 This repo uses best-effort usage logging to keep a lightweight, diffable record of skill usage without storing prompts or user data.
 
+> ### STOP: Logging is part of the task, not optional
+> If you are about to respond and have not logged the skill, **you are not done**.
+>
+> **Mandatory micro-checklist (do not skip):**
+> - [ ] Identify the skill invoked.
+> - [ ] Run `scripts/log-skill-usage.ps1` with metadata only.
+> - [ ] If logging fails, say so in the response and proceed.
+
 ### Where To Log
 
 Write one JSONL line per skill invocation to:
