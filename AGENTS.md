@@ -51,6 +51,25 @@ Create the directory path if it does not exist.
 
 Helper script: `scripts/log-skill-usage.ps1`
 
+### Auto-Backfill (Session Logs)
+
+If manual logging is missed, use the session log backfill script:
+
+- `scripts/backfill-skill-usage-from-sessions.ps1`
+
+This script **only extracts skill names** from assistant messages that follow the
+`Using \`<skill>\`` pattern and writes metadata-only entries. It must not write
+user text, prompts, file contents, or secrets.
+
+### Data Hygiene (Non-Negotiable)
+
+Before writing any log entry, ensure:
+
+- **No prompts or user text** (ever).
+- **No file contents** (even small snippets).
+- **No secrets or credentials** (API keys, tokens, passwords).
+- **Notes are generic** (metadata-only; keep them short).
+
 ### Required Fields
 
 - `timestamp`: ISO 8601 UTC timestamp (example: `2026-01-17T18:24:03Z`).
