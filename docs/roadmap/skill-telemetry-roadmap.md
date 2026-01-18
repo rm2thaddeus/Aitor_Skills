@@ -31,6 +31,7 @@ Track remaining PRD items and plan phased delivery of the self-improving system.
 - Heuristics for dead/flaky skills with configurable thresholds.
 - Summary-to-proposal rules (what qualifies as a change).
 - Approval gates with go/no-go checklist in summarizer output.
+- Conversational review mode to digest summaries with the user.
 
 ### Reliability
 
@@ -50,6 +51,8 @@ Track remaining PRD items and plan phased delivery of the self-improving system.
 - Implement failure thresholds (default 30%) in summarizer output.
 - Add "dead skills" detection (no usage in N days).
 - Output a conservative proposal checklist.
+- Link summaries to project context (where/how skills were used).
+- Add a guided review prompt that drives human-in-loop decisions.
 
 ### Phase 3: Advanced Integrity (Optional)
 

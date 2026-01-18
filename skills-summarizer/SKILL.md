@@ -20,6 +20,9 @@ Write both outputs to `docs/skill-upkeep/YYYY-MM/`:
 - `summary-YYYY-MM-DD.json`
 - `summary-YYYY-MM-DD.html`
 
+The JSON summary must include the handoff fields defined in `AGENTS.md`
+(totals, by_skill, by_repo, review_prompts, candidate_actions).
+
 ## Workflow
 
 ### 1) Summarize Logs (Script First)
@@ -37,6 +40,8 @@ Based on the summary:
 - Identify low-risk, high-impact improvements.
 - Proposals must be minimal and reviewable.
 - Ask for approval before making any edits.
+- Include a short set of review prompts to guide the human-in-loop discussion.
+- Include project context (where/how skills were used) via `project_repo_root`.
 
 Use this proposal format:
 

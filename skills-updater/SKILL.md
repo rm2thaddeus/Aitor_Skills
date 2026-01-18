@@ -25,6 +25,7 @@ It is conservative and audit-friendly: propose, gate, then edit.
 - Skill usage logs: `logs/skills/YYYY-MM/skill-usage-YYYY-MM-DD.jsonl`.
 - Target skill files: `*/SKILL.md` and any referenced assets/scripts.
 - Repo rules in `AGENTS.md`.
+- Most recent summary: `docs/skill-upkeep/YYYY-MM/summary-YYYY-MM-DD.json`.
 
 ## Workflow
 
@@ -33,6 +34,17 @@ It is conservative and audit-friendly: propose, gate, then edit.
 - Pick one gap at a time (failure, repeated correction, or friction).
 - Map it to a specific file and minimal change.
 - Draft a short proposal: Why, What, Risk, Test.
+- If a summary exists, derive gaps from its `by_skill`, `by_repo`, and
+  `candidate_actions` fields.
+
+### 1a) Provide Insights Report (Before Proposals)
+
+Using the summary JSON, provide a short insights report that explains:
+
+- Usage hotspots (most-used skills and where).
+- Gaps or missing workflows implied by usage.
+- Overlap or duplication candidates.
+- Anything the human reviewer should validate.
 
 ### 2) Gate Before Editing
 
@@ -66,6 +78,10 @@ Use a short, structured proposal:
 - **What:** one sentence
 - **Risk:** one sentence
 - **Test:** one sentence or "no tests"
+
+Each proposal must also include:
+
+- **Where it helps:** one sentence describing the project or workflow context.
 
 ## Usage Logging
 

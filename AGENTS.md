@@ -2,6 +2,13 @@
 
 This repo is a living library of agent skills (each skill lives in a `<skill-name>/SKILL.md` folder). This file tells agents how to work inside this repo so collaboration stays seamless and the skills improve over time.
 
+> ## NON-NEGOTIABLE: LOG EVERY SKILL INVOCATION
+> If skill usage is not logged, the feedback loop breaks. Logging is mandatory for every skill invocation in this repo.
+>
+> **Do this every time:** run `scripts/log-skill-usage.ps1` with metadata only.
+>
+> **Never skip it.** If logging fails, say so in the response and continue.
+
 ## Goals
 
 - Make agent-user collaboration feel seamless and low-friction.
@@ -55,6 +62,35 @@ Helper script: `scripts/log-skill-usage.ps1`
 ### Example JSONL Entry
 
 {"timestamp":"2026-01-17T18:24:03Z","skill_name":"doc-coauthoring","skill_version":"unknown","status":"success","notes":"stage 1 context gathering","project_repo_root":"C:/Users/aitor/.codex/skills","project_cwd":"C:/Users/aitor/.codex/skills"}
+
+## Telemetry-to-Improvement Chain (Handoff Contract)
+
+This repo assumes a strict information chain so summaries and updates stay auditable.
+
+### Flow
+
+1) Logs capture metadata-only usage.
+2) Summarizer produces an overview + review prompts.
+3) Updater consumes the summary to produce insights and proposals.
+
+### Required Summary Fields (JSON)
+
+Summaries written to `docs/skill-upkeep/YYYY-MM/summary-YYYY-MM-DD.json` must include:
+
+- `summary_date`: ISO 8601 date.
+- `window_days`: integer (e.g., 7).
+- `totals`: counts for `invocations`, `success`, `failure`, `retries`.
+- `by_skill`: array with `skill_name`, `count`, `success_rate`, `top_notes`.
+- `by_repo`: array with `project_repo_root`, `skill_counts`, `notes`.
+- `review_prompts`: 3-7 questions for human-in-loop review.
+- `candidate_actions`: optional list of potential improvements (no edits implied).
+
+### Updater Output Contract
+
+When using the summary, the updater must return:
+
+- **Insights report**: short narrative of usage patterns, gaps, and overlap.
+- **Proposals** (if any): each with `why`, `where it helps`, `risk`, `test`.
 
 ## Skill Polish Loop (Proactive Improvement)
 
