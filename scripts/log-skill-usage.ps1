@@ -10,7 +10,13 @@ param(
   [string]$SkillVersion = 'unknown',
   [string]$ProjectRepoRoot = '',
   [string]$ProjectCwd = '',
-  [string]$TimestampUtc = ''
+  [string]$TimestampUtc = '',
+  [string]$SessionId = '',
+  [int]$EventIndex = -1,
+  [string]$Source = 'manual',
+  [string]$EventType = 'manual',
+  [string]$CliOriginator = '',
+  [string]$CliVersion = ''
 )
 
 function Get-RepoRoot([string]$StartPath) {
@@ -46,12 +52,18 @@ if ($notesSafe.Length -gt 200) {
 
 $entry = [ordered]@{
   timestamp = $TimestampUtc
+  session_id = $SessionId
+  event_index = $EventIndex
   skill_name = $SkillName
   skill_version = $SkillVersion
   status = $Status
+  source = $Source
+  event_type = $EventType
   notes = $notesSafe
   project_repo_root = $ProjectRepoRoot
   project_cwd = $ProjectCwd
+  cli_originator = $CliOriginator
+  cli_version = $CliVersion
 }
 
 $month = (Get-Date).ToUniversalTime().ToString('yyyy-MM')

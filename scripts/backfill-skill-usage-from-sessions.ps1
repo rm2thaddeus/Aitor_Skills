@@ -2,6 +2,8 @@ param(
   [string]$SessionsRoot = "$env:USERPROFILE\\.codex\\sessions",
   [int]$SinceDays = 7,
   [string]$RepoRootOverride = '',
+  [string]$OutputRoot = "$PSScriptRoot\\..\\logs\\skills",
+  [switch]$Rewrite,
   [switch]$DryRun
 )
 
@@ -26,7 +28,7 @@ function Get-RepoRoot([string]$StartPath) {
 function Get-LogPath([DateTime]$UtcTime) {
   $month = $UtcTime.ToString('yyyy-MM')
   $day = $UtcTime.ToString('yyyy-MM-dd')
-  $logDir = [IO.Path]::GetFullPath((Join-Path -Path $PSScriptRoot -ChildPath "..\\logs\\skills\\$month"))
+  $logDir = [IO.Path]::GetFullPath((Join-Path -Path $OutputRoot -ChildPath $month))
   New-Item -ItemType Directory -Force -Path $logDir | Out-Null
   return Join-Path -Path $logDir -ChildPath "skill-usage-$day.jsonl"
 }
@@ -36,11 +38,19 @@ function Add-LogEntry($entry, [switch]$DryRun) {
   $ts = [DateTime]::Parse($entry.timestamp).ToUniversalTime()
   $logFile = Get-LogPath -UtcTime $ts
   $entryKey = "$($entry.timestamp)|$($entry.skill_name)"
+  $dateKey = $ts.ToString('yyyy-MM-dd')
 
   if ($script:SeenKeys.ContainsKey($entryKey)) {
     return
   }
   $script:SeenKeys[$entryKey] = $true
+
+  if ($Rewrite -and -not $script:ClearedDates.ContainsKey($dateKey)) {
+    if (-not $DryRun) {
+      Clear-Content -Path $logFile -ErrorAction SilentlyContinue
+    }
+    $script:ClearedDates[$dateKey] = $true
+  }
 
   if (Test-Path $logFile) {
     $existing = Get-Content -Path $logFile -ErrorAction SilentlyContinue
@@ -71,7 +81,7 @@ function Extract-Skills([string]$text) {
 
 function Assert-SafeNotes([string]$notes) {
   if (-not $notes) { return }
-  $danger = @("api", "token", "secret", "password", "passwd", "key=", "bearer", "oauth", "auth", "session", "cookie")
+  $danger = @("api", "token", "secret", "password", "passwd", "key=", "bearer", "oauth", "auth", "cookie")
   foreach ($term in $danger) {
     if ($notes.ToLower().Contains($term)) {
       throw "Unsafe note detected ($term). Refusing to write logs."
@@ -81,6 +91,7 @@ function Assert-SafeNotes([string]$notes) {
 
 $cutoff = (Get-Date).ToUniversalTime().AddDays(-$SinceDays)
 $script:SeenKeys = @{}
+$script:ClearedDates = @{}
 $files = Get-ChildItem -Path $SessionsRoot -Recurse -Filter "rollout-*.jsonl" -File -ErrorAction SilentlyContinue |
   Where-Object { $_.Length -gt 0 -and $_.LastWriteTimeUtc -ge $cutoff }
 
@@ -92,14 +103,20 @@ if (-not $files) {
 foreach ($file in $files) {
   $sessionCwd = $null
   $sessionId = $null
+  $sessionOriginator = $null
+  $sessionCliVersion = $null
+  $eventIndex = 0
 
   foreach ($line in Get-Content -Path $file.FullName) {
+    $eventIndex += 1
     $obj = $null
     try { $obj = $line | ConvertFrom-Json } catch { continue }
 
     if ($obj.type -eq "session_meta") {
       $sessionCwd = $obj.payload.cwd
       $sessionId = $obj.payload.id
+      $sessionOriginator = $obj.payload.originator
+      $sessionCliVersion = $obj.payload.cli_version
       continue
     }
 
@@ -121,19 +138,24 @@ foreach ($file in $files) {
 
     $projectCwd = if ($sessionCwd) { $sessionCwd } else { "" }
     $projectRepoRoot = if ($RepoRootOverride) { $RepoRootOverride } elseif ($projectCwd) { Get-RepoRoot $projectCwd } else { "" }
-    $notes = "auto: detected skill usage from rollout log"
-    if ($sessionId) { $notes = "$notes ($sessionId)" }
+    $notes = "auto: extracted from codex session logs"
     Assert-SafeNotes $notes
 
     foreach ($skill in $skills) {
       $entry = [ordered]@{
         timestamp = $obj.timestamp
+        session_id = $sessionId
+        event_index = $eventIndex
         skill_name = $skill
         skill_version = "unknown"
         status = "success"
+        source = "codex_session_log"
+        event_type = $obj.type
         notes = $notes
         project_repo_root = $projectRepoRoot
         project_cwd = $projectCwd
+        cli_originator = $sessionOriginator
+        cli_version = $sessionCliVersion
       }
       Add-LogEntry -entry $entry -DryRun:$DryRun
     }

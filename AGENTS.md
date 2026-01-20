@@ -5,7 +5,9 @@ This repo is a living library of agent skills (each skill lives in a `<skill-nam
 > ## NON-NEGOTIABLE: LOG EVERY SKILL INVOCATION
 > If skill usage is not logged, the feedback loop breaks. Logging is mandatory for every skill invocation in this repo.
 >
-> **Do this every time:** run `scripts/log-skill-usage.ps1` with metadata only.
+> **Do this every time:** ensure session-derived logs are generated via
+> `scripts/backfill-skill-usage-from-sessions.ps1`. Use
+> `scripts/log-skill-usage.ps1` only as a fallback if extraction is blocked.
 >
 > **Never skip it.** If logging fails, say so in the response and continue.
 
@@ -31,14 +33,15 @@ Applies to all files under `C:/Users/aitor/.codex/skills`, including:
 
 ## Skill Usage Tracking (JSONL)
 
-This repo uses best-effort usage logging to keep a lightweight, diffable record of skill usage without storing prompts or user data.
+This repo uses session-derived usage logging to keep a lightweight, diffable record of skill usage without storing prompts or user data.
 
 > ### STOP: Logging is part of the task, not optional
 > If you are about to respond and have not logged the skill, **you are not done**.
 >
 > **Mandatory micro-checklist (do not skip):**
 > - [ ] Identify the skill invoked.
-> - [ ] Run `scripts/log-skill-usage.ps1` with metadata only.
+> - [ ] Ensure extraction is scheduled via `scripts/backfill-skill-usage-from-sessions.ps1`.
+> - [ ] If extraction is blocked, run `scripts/log-skill-usage.ps1` with metadata only.
 > - [ ] If logging fails, say so in the response and proceed.
 
 ### Where To Log
@@ -49,7 +52,9 @@ Write one JSONL line per skill invocation to:
 
 Create the directory path if it does not exist.
 
-Helper script: `scripts/log-skill-usage.ps1`
+Canonical extractor: `scripts/backfill-skill-usage-from-sessions.ps1`
+
+Fallback (manual): `scripts/log-skill-usage.ps1`
 
 ### Auto-Backfill (Session Logs)
 
@@ -61,6 +66,12 @@ This script **only extracts skill names** from assistant messages that follow th
 `Using \`<skill>\`` pattern and writes metadata-only entries. It must not write
 user text, prompts, file contents, or secrets.
 
+### Schema Migration (Legacy Logs)
+
+If legacy logs exist, normalize them to the session-derived schema with:
+
+- `scripts/migrate-skill-logs-to-session-schema.ps1`
+
 ### Data Hygiene (Non-Negotiable)
 
 Before writing any log entry, ensure:
@@ -70,15 +81,21 @@ Before writing any log entry, ensure:
 - **No secrets or credentials** (API keys, tokens, passwords).
 - **Notes are generic** (metadata-only; keep them short).
 
-### Required Fields
+### Required Fields (Session-Derived Schema)
 
 - `timestamp`: ISO 8601 UTC timestamp (example: `2026-01-17T18:24:03Z`).
+- `session_id`: session identifier from Codex session logs.
+- `event_index`: integer sequence within the session file.
 - `skill_name`: skill name as invoked.
 - `skill_version`: from SKILL.md front matter when present, otherwise `unknown`.
 - `status`: `success`, `failure`, or `retries`.
+- `source`: `codex_session_log`.
+- `event_type`: log event type (`event_msg` or `response_item`).
 - `notes`: short, safe metadata only; no user text, file contents, secrets, or PII.
 - `project_repo_root`: nearest git repo root if detected, otherwise `null`.
 - `project_cwd`: current working directory.
+- `cli_originator`: CLI originator from session meta (if present).
+- `cli_version`: CLI version from session meta (if present).
 
 ### Operational Rules
 
@@ -88,7 +105,7 @@ Before writing any log entry, ensure:
 
 ### Example JSONL Entry
 
-{"timestamp":"2026-01-17T18:24:03Z","skill_name":"doc-coauthoring","skill_version":"unknown","status":"success","notes":"stage 1 context gathering","project_repo_root":"C:/Users/aitor/.codex/skills","project_cwd":"C:/Users/aitor/.codex/skills"}
+{"timestamp":"2026-01-17T18:24:03Z","session_id":"019bcc90-64b0-78d3-9b36-dec0d5e5f3ab","event_index":120,"skill_name":"doc-coauthoring","skill_version":"unknown","status":"success","source":"codex_session_log","event_type":"event_msg","notes":"auto: extracted from codex session logs","project_repo_root":"C:/Users/aitor/.codex/skills","project_cwd":"C:/Users/aitor/.codex/skills","cli_originator":"codex_cli_rs","cli_version":"0.87.0"}
 
 ## Telemetry-to-Improvement Chain (Handoff Contract)
 
