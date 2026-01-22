@@ -66,6 +66,12 @@ This script **only extracts skill names** from assistant messages that follow th
 `Using \`<skill>\`` pattern and writes metadata-only entries. It must not write
 user text, prompts, file contents, or secrets.
 
+**Edge case: long-running sessions**
+If a Codex terminal stays open, the rollout file may remain empty (0 bytes) until
+the session ends. In that case, backfill will not see new data. Close the session
+and rerun the backfill with a wider window (e.g. `--days 3`) to capture the full
+session history.
+
 ### Schema Migration (Legacy Logs)
 
 If legacy logs exist, normalize them to the session-derived schema with:
@@ -102,6 +108,12 @@ Before writing any log entry, ensure:
 - Log immediately before responding, or immediately after if the response must be first.
 - Do not log prompts, outputs, or any user-provided text.
 - If logging fails (e.g., file system error), say so in the response and continue.
+
+### Session Close Checklist
+
+- [ ] Close long-running Codex sessions to flush rollout logs.
+- [ ] Run `scripts/backfill-skill-usage-from-sessions.ps1 --days 3` to capture late logs.
+- [ ] Re-run summarizer after backfill to update the upkeep report.
 
 ### Example JSONL Entry
 

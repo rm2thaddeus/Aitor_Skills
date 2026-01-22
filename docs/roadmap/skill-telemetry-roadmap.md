@@ -24,6 +24,7 @@ Track remaining PRD items and plan phased delivery of the self-improving system.
 
 - Tool call instrumentation (best-effort, avoid duplicate logs).
 - Failure taxonomy and error classification in logs.
+- Note: long-running sessions may delay rollout logs until session close.
 - Explicit retention policy (default 90 days) and pruning approach.
 
 ### Upkeep Automation
@@ -37,6 +38,7 @@ Track remaining PRD items and plan phased delivery of the self-improving system.
 
 - Summarizer scheduling guidance (daily vs weekly).
 - Coverage gaps: make missing logs visible to reviewers.
+- Backfill timing guidance: rerun after closing long-running sessions.
 
 ## Suggested Phases
 
