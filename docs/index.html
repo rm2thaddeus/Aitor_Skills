@@ -3,114 +3,113 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aitor Skills - Self-Improving Skill System</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;500;700&family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Aitor Skills - Synthetic Biology of Workflows</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;500;700&family=IBM+Plex+Sans:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f14;
-      --panel: #0f1722;
-      --ink: #e7f0ff;
-      --muted: #92a2b6;
-      --accent: #22d3ee;
-      --accent-2: #f59e0b;
-      --grid: rgba(34, 211, 238, 0.08);
-      --line: rgba(231, 240, 255, 0.08);
-      --shadow: 0 18px 40px rgba(5, 9, 15, 0.6);
+      --bg: #f5f3ee;
+      --ink: #1d1f21;
+      --muted: #5b6b6f;
+      --panel: #ffffff;
+      --line: rgba(29, 31, 33, 0.12);
+      --accent: #2b9a8f;
+      --accent-2: #f4b942;
+      --accent-3: #d0604c;
+      --shadow: 0 24px 60px rgba(25, 25, 25, 0.12);
+      --mesh-1: #d9efe7;
+      --mesh-2: #f6edd2;
+      --mesh-3: #f0dad7;
     }
 
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: radial-gradient(circle at 15% 15%, #0e1a24 0%, #0b0f14 55%);
+      font-family: "IBM Plex Sans", sans-serif;
       color: var(--ink);
-      font-family: "IBM Plex Mono", monospace;
+      background: radial-gradient(circle at 10% 20%, var(--mesh-1), transparent 60%),
+        radial-gradient(circle at 90% 10%, var(--mesh-2), transparent 55%),
+        radial-gradient(circle at 60% 90%, var(--mesh-3), transparent 60%),
+        var(--bg);
       overflow-x: hidden;
     }
 
-    .grid-overlay {
+    #cellfield {
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 48px 48px;
-      opacity: 0.6;
-      pointer-events: none;
       z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
     }
 
-    .scanline {
+    .grain {
       position: fixed;
       inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.03),
-        rgba(255, 255, 255, 0.03) 1px,
-        transparent 1px,
-        transparent 3px
-      );
-      opacity: 0.15;
-      pointer-events: none;
       z-index: 1;
+      opacity: 0.2;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23noise)' opacity='0.2'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
     }
 
     .container {
       position: relative;
       z-index: 2;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 48px 20px 80px;
+      padding: 56px 24px 100px;
     }
 
-    header {
+    .hero {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
+      gap: 32px;
       align-items: center;
     }
 
     .badge {
       display: inline-flex;
+      gap: 10px;
       align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      color: var(--accent);
+      padding: 6px 14px;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
     }
 
     h1 {
-      font-family: "Oxanium", sans-serif;
-      font-size: clamp(2.6rem, 3vw + 1.4rem, 4rem);
-      margin: 18px 0 16px;
-      line-height: 1.1;
+      font-family: "Fraunces", serif;
+      font-size: clamp(2.8rem, 3vw + 1.5rem, 4.5rem);
+      margin: 18px 0 12px;
+      line-height: 1.05;
     }
 
     .lead {
+      font-size: 1.1rem;
+      line-height: 1.7;
       color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
+      max-width: 600px;
     }
 
     .cta-row {
       display: flex;
       gap: 14px;
-      margin-top: 26px;
       flex-wrap: wrap;
+      margin-top: 26px;
     }
 
     .cta {
       padding: 12px 18px;
-      border-radius: 10px;
+      border-radius: 14px;
       border: 1px solid var(--accent);
-      color: var(--bg);
-      background: linear-gradient(120deg, var(--accent), #7dd3fc);
-      font-weight: 600;
+      background: linear-gradient(120deg, #1b8f85, #6ed2c6);
+      color: #ffffff;
       text-decoration: none;
-      font-family: "Oxanium", sans-serif;
+      font-weight: 600;
       box-shadow: var(--shadow);
     }
 
@@ -122,264 +121,590 @@
     }
 
     .panel {
-      background: var(--panel);
+      background: rgba(255, 255, 255, 0.85);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px;
+      border-radius: 20px;
+      padding: 20px;
       box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
     }
 
-    .hero-panel {
+    .specimen {
       display: grid;
-      gap: 12px;
-      border-left: 3px solid var(--accent);
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-panel h3 {
-      font-family: "Oxanium", sans-serif;
+    .specimen header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .specimen h3 {
       margin: 0;
-      font-size: 1.1rem;
+      font-family: "Fraunces", serif;
+      font-size: 1.4rem;
     }
 
-    .hero-panel p {
+    .specimen p {
       margin: 0;
       color: var(--muted);
       line-height: 1.5;
+    }
+
+    .dna {
+      position: absolute;
+      right: -10px;
+      top: -20px;
+      width: 200px;
+      opacity: 0.6;
     }
 
     section {
-      margin-top: 44px;
+      margin-top: 56px;
     }
 
     .section-title {
-      font-family: "Oxanium", sans-serif;
-      font-size: 1.4rem;
+      font-family: "Fraunces", serif;
+      font-size: 1.6rem;
       margin-bottom: 18px;
     }
 
-    .loop {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
     }
 
-    .loop-card {
-      position: relative;
-      padding: 16px;
-      border-radius: 14px;
+    .card {
+      padding: 18px;
+      border-radius: 16px;
       border: 1px solid var(--line);
-      background: linear-gradient(140deg, rgba(34, 211, 238, 0.08), transparent 60%);
-      min-height: 150px;
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: var(--shadow);
     }
 
-    .loop-card span {
-      color: var(--accent-2);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.7rem;
+    .card h4 {
+      margin: 0 0 8px;
+      font-family: "Fraunces", serif;
     }
 
-    .loop-card h4 {
-      margin: 10px 0 8px;
-      font-family: "Oxanium", sans-serif;
-    }
-
-    .loop-card p {
+    .card p {
       margin: 0;
       color: var(--muted);
       line-height: 1.5;
     }
 
-    .links {
+    .atlas {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(43, 154, 143, 0.12);
+      border: 1px solid rgba(43, 154, 143, 0.3);
+      color: #1b5f58;
+    }
+
+    .sequence {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      background: #f7f5f1;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      padding: 16px;
+      min-height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sequence::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px dashed rgba(29, 31, 33, 0.08);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .pipeline {
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fbfaf7;
+      padding: 26px 22px 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pipeline-track {
+      position: relative;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(43, 154, 143, 0.15);
+      margin: 26px 12px 18px;
+      overflow: hidden;
+    }
+
+    .pipeline-flow {
+      position: absolute;
+      top: 0;
+      left: -35%;
+      height: 100%;
+      width: 45%;
+      background: linear-gradient(90deg, transparent, rgba(43, 154, 143, 0.6), rgba(244, 185, 66, 0.75), transparent);
+      animation: flowPulse 6s linear infinite;
+    }
+
+    .pipeline-stages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+      position: relative;
+    }
+
+    .pipeline-stage {
+      text-align: center;
+    }
+
+    .pipeline-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      background: #ffffff;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 6px rgba(43, 154, 143, 0.12);
+    }
+
+    .pipeline-stage h4 {
+      margin: 0 0 6px;
+      font-family: "Fraunces", serif;
+      font-size: 1rem;
+    }
+
+    .pipeline-stage p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
 
     .links a {
       display: block;
-      padding: 14px 16px;
-      border-radius: 12px;
+      padding: 16px;
+      border-radius: 16px;
       border: 1px solid var(--line);
       text-decoration: none;
-      color: var(--ink);
-      background: rgba(15, 23, 34, 0.8);
+      color: inherit;
+      background: rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s ease;
     }
 
-    .links a strong {
+    .links a:hover {
+      transform: translateY(-4px);
+    }
+
+    .links strong {
       display: block;
-      font-family: "Oxanium", sans-serif;
+      font-family: "Fraunces", serif;
       margin-bottom: 6px;
     }
 
-    .security {
+    .timeline {
       display: grid;
       gap: 12px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
 
-    .security li {
-      margin-bottom: 8px;
+    .timeline .step {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.85);
     }
 
-    .orbit {
-      position: absolute;
-      top: -40px;
-      right: -20px;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 1px dashed rgba(34, 211, 238, 0.3);
-      animation: spin 18s linear infinite;
+    .step span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent-3);
     }
 
-    .orbit::after {
-      content: "";
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      width: 14px;
-      height: 14px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 16px rgba(34, 211, 238, 0.8);
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 22px;
     }
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .stat {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--line);
     }
 
-    @keyframes floatIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    .stat h5 {
+      margin: 0 0 6px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .stat p {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: 1.3rem;
     }
 
     .reveal {
-      animation: floatIn 0.9s ease forwards;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    @media (max-width: 900px) {
-      header {
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes flowPulse {
+      from { transform: translateX(0); }
+      to { transform: translateX(220%); }
+    }
+
+    footer {
+      margin-top: 80px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 960px) {
+      .hero, .atlas {
         grid-template-columns: 1fr;
       }
-      .orbit {
-        position: relative;
-        margin: 0 auto 12px;
-        right: auto;
-        top: auto;
+      .timeline .step {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <div class="grid-overlay"></div>
-  <div class="scanline"></div>
+  <canvas id="cellfield" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
   <div class="container">
-    <header>
+    <section class="hero">
       <div class="reveal">
-        <div class="badge">Self-improving skills</div>
-        <h1>Explore and improve skills as you go.</h1>
+        <div class="badge">Synthetic Biology Protocol</div>
+        <h1>Aitor Skills is a living genome of workflows.</h1>
         <p class="lead">
-          Aitor Skills is a Codex and Claude-first library that tracks usage,
-          summarizes behavior, and upgrades workflows through human-approved
-          proposals. It is designed to evolve without leaking prompts or user data.
+          This repository behaves like a lab: skills are genes, usage is telemetry,
+          and every approved upgrade is a mutation that improves survival. Track,
+          summarize, and evolve with skills-summarizer and skills-updater under
+          human oversight.
         </p>
         <div class="cta-row">
-          <a class="cta" href="https://github.com/rm2thaddeus/Aitor_Skills">Explore skills</a>
-          <a class="cta secondary" href="roadmap/skill-telemetry-roadmap.md">Read the roadmap</a>
+          <a class="cta" href="https://github.com/rm2thaddeus/Aitor_Skills">Open the genome</a>
+          <a class="cta secondary" href="roadmap/skill-telemetry-roadmap.md">View the evolution roadmap</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat">
+            <h5>Focus</h5>
+            <p>Safety-first adaptation</p>
+          </div>
+          <div class="stat">
+            <h5>Fuel</h5>
+            <p>Metadata-only telemetry</p>
+          </div>
+          <div class="stat">
+            <h5>Gate</h5>
+            <p>Human approval loop</p>
+          </div>
         </div>
       </div>
-      <div class="panel hero-panel reveal">
-        <div class="orbit" aria-hidden="true"></div>
-        <h3>Live loop</h3>
-        <p>Track -> Summarize -> Propose -> Approve. No silent edits.</p>
-        <p>Logs are metadata only. No prompts. No user text. No secrets.</p>
-      </div>
-    </header>
-
-    <section class="reveal">
-      <div class="section-title">Philosophy</div>
-      <div class="panel" style="display:grid; gap:18px;">
-        <p class="lead" style="margin:0;">
-          The system treats skills as living protocols, not static snippets. Over time, the weekly
-          feedback loop compounds: usage data reveals what actually works, highlights missing
-          workflows, and surfaces opportunities to simplify. That evidence drives pruning,
-          consolidation, and targeted upgrades so the library grows smarter without growing noisy.
-          AGENTS.md sets the shared operating contract; SKILL.md files encode specialized workflows.
-          With a human in the loop, the summarizer becomes a safe proposal engine that turns
-          real usage into better skills and, eventually, new ones.
-        </p>
-      </div>
-    </section>
-
-    <section class="reveal">
-      <div class="section-title">Self-improvement loop</div>
-      <div class="loop">
-        <div class="loop-card">
-          <span>Step 01</span>
-          <h4>Track usage</h4>
-          <p>Daily JSONL telemetry with minimal metadata and zero user content.</p>
-        </div>
-        <div class="loop-card">
-          <span>Step 02</span>
-          <h4>Summarize</h4>
-          <p>Generate JSON + HTML upkeep cards for quick human review.</p>
-        </div>
-        <div class="loop-card">
-          <span>Step 03</span>
-          <h4>Propose</h4>
-          <p>Conservative changes only. No auto-edits without approval.</p>
-        </div>
-        <div class="loop-card">
-          <span>Step 04</span>
-          <h4>Approve</h4>
-          <p>Branch-first edits and explicit go/no-go gates.</p>
-        </div>
+      <div class="panel specimen reveal">
+        <svg class="dna" viewBox="0 0 160 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M32 10C90 40 70 90 128 120C70 150 90 200 32 230" stroke="#2b9a8f" stroke-width="3" stroke-dasharray="8 6"/>
+          <path d="M128 10C70 40 90 90 32 120C90 150 70 200 128 230" stroke="#f4b942" stroke-width="3" stroke-dasharray="8 6"/>
+          <circle cx="64" cy="48" r="6" fill="#d0604c"/>
+          <circle cx="96" cy="92" r="6" fill="#2b9a8f"/>
+          <circle cx="64" cy="140" r="6" fill="#f4b942"/>
+          <circle cx="96" cy="186" r="6" fill="#d0604c"/>
+        </svg>
+        <header>
+          <span>Specimen</span>
+          <span>ID: AS-042</span>
+        </header>
+        <h3>Self-improving skill system</h3>
+        <p>Each skill is a protocol. Each protocol is versioned. Each change is audited.</p>
+        <p>skills-summarizer drafts. skills-updater applies. Humans approve.</p>
       </div>
     </section>
 
     <section class="reveal">
-      <div class="section-title">Security posture</div>
-      <div class="security">
+      <div class="section-title">Genome map</div>
+      <div class="atlas">
         <div class="panel">
-          <ul>
-            <li>Logs are data, never re-injected into prompts.</li>
-            <li>No prompts, user text, file contents, secrets, or PII.</li>
-            <li>Logging, summarization, and updates are separate steps.</li>
-          </ul>
+          <h3 style="margin-top:0;">Skill clusters</h3>
+          <p class="lead" style="margin:0;">
+            The library organizes functions into specialized skills you can call directly.
+            These are a few high-impact protocols that show how the system evolves.
+          </p>
+          <div class="chip-list">
+            <span class="chip">brainstorming</span>
+            <span class="chip">frontend-design</span>
+            <span class="chip">skills-summarizer</span>
+            <span class="chip">skills-updater</span>
+            <span class="chip">test-driven-development</span>
+            <span class="chip">systematic-debugging</span>
+          </div>
         </div>
-        <div class="panel">
-          <ul>
-            <li>Human approval required for skill edits.</li>
-            <li>Branch workflow for any skill change.</li>
-            <li>Future: integrity hashing and retention pruning.</li>
-          </ul>
+        <div class="sequence" id="sequenceViewer" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-title">Evolution loop</div>
+      <div class="timeline">
+        <div class="step">
+          <span>Stage 01</span>
+          <div>
+            <h4 style="margin:0 0 6px;">Signal capture</h4>
+            <p class="lead" style="margin:0;">Collect usage metadata to see which skills thrive and where friction appears.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span>Stage 02</span>
+          <div>
+            <h4 style="margin:0 0 6px;">Synthesis</h4>
+            <p class="lead" style="margin:0;">skills-summarizer renders behavior into upkeep reports and candidate improvements.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span>Stage 03</span>
+          <div>
+            <h4 style="margin:0 0 6px;">Mutation proposal</h4>
+            <p class="lead" style="margin:0;">skills-updater proposes conservative edits with reviewable diffs.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span>Stage 04</span>
+          <div>
+            <h4 style="margin:0 0 6px;">Selection</h4>
+            <p class="lead" style="margin:0;">Human approval gates evolution so the genome improves without drift.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-title">Repository flow</div>
+      <div class="pipeline">
+        <div class="pipeline-track">
+          <span class="pipeline-flow" aria-hidden="true"></span>
+        </div>
+        <div class="pipeline-stages">
+          <div class="pipeline-stage">
+            <div class="pipeline-dot"></div>
+            <h4>SKILL.md</h4>
+            <p>Protocols define what every skill must do.</p>
+          </div>
+          <div class="pipeline-stage">
+            <div class="pipeline-dot"></div>
+            <h4>Telemetry</h4>
+            <p>Metadata-only signals capture friction and success.</p>
+          </div>
+          <div class="pipeline-stage">
+            <div class="pipeline-dot"></div>
+            <h4>skills-summarizer</h4>
+            <p>Upkeep reports and candidate improvements.</p>
+          </div>
+          <div class="pipeline-stage">
+            <div class="pipeline-dot"></div>
+            <h4>skills-updater</h4>
+            <p>Branch-first proposals with clear diffs.</p>
+          </div>
+          <div class="pipeline-stage">
+            <div class="pipeline-dot"></div>
+            <h4>Human approval</h4>
+            <p>Selection gates keep evolution safe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="section-title">Insight modules</div>
+      <div class="grid">
+        <div class="card">
+          <h4>Telemetry hygiene</h4>
+          <p>skills-summarizer only consumes metadata, never prompts or user text.</p>
+        </div>
+        <div class="card">
+          <h4>Safety valves</h4>
+          <p>using-superpowers enforces skill invocation before any action.</p>
+        </div>
+        <div class="card">
+          <h4>Evidence-first design</h4>
+          <p>brainstorming, writing-plans, and test-driven-development stay rigorous.</p>
         </div>
       </div>
     </section>
 
     <section class="reveal">
       <div class="section-title">Start here</div>
-      <div class="links">
+      <div class="grid links">
         <a href="architecture/skill-usage-tracking.md">
           <strong>Architecture</strong>
-          How telemetry and upkeep flow together.
+          Understand how telemetry becomes evidence.
         </a>
         <a href="roadmap/skill-telemetry-roadmap.md">
           <strong>Roadmap</strong>
-          What is left from the PRD and why.
+          Track the next mutations for the system.
         </a>
         <a href="https://github.com/rm2thaddeus/Aitor_Skills/tree/main/skills-updater">
           <strong>Updater skill</strong>
-          Review and apply improvements safely.
+          Apply proposals with branch-first safety.
         </a>
         <a href="https://github.com/rm2thaddeus/Aitor_Skills/tree/main/skills-summarizer">
           <strong>Summarizer skill</strong>
-          Digest telemetry into reports.
+          Convert telemetry into upkeep reports.
         </a>
       </div>
     </section>
+
+    <footer class="reveal">
+      Built as a synthetic biology lab for workflows: measure, synthesize, mutate, select.
+    </footer>
   </div>
+
+  <script>
+    const canvas = document.getElementById("cellfield");
+    const ctx = canvas.getContext("2d");
+    const cells = [];
+    const maxCells = 40;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function spawnCell() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: 18 + Math.random() * 40,
+        vx: -0.15 + Math.random() * 0.3,
+        vy: -0.12 + Math.random() * 0.24,
+        hue: 150 + Math.random() * 60,
+        alpha: 0.1 + Math.random() * 0.2
+      };
+    }
+
+    function drawCell(cell) {
+      const gradient = ctx.createRadialGradient(cell.x, cell.y, cell.r * 0.3, cell.x, cell.y, cell.r);
+      gradient.addColorStop(0, `hsla(${cell.hue}, 40%, 70%, ${cell.alpha})`);
+      gradient.addColorStop(1, `hsla(${cell.hue}, 50%, 60%, 0)`);
+      ctx.beginPath();
+      ctx.fillStyle = gradient;
+      ctx.arc(cell.x, cell.y, cell.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      cells.forEach(cell => {
+        cell.x += cell.vx;
+        cell.y += cell.vy;
+        if (cell.x < -80 || cell.x > canvas.width + 80 || cell.y < -80 || cell.y > canvas.height + 80) {
+          Object.assign(cell, spawnCell());
+          cell.x = Math.random() < 0.5 ? -60 : canvas.width + 60;
+          cell.y = Math.random() * canvas.height;
+        }
+        drawCell(cell);
+      });
+      requestAnimationFrame(animate);
+    }
+
+    function initCells() {
+      cells.length = 0;
+      for (let i = 0; i < maxCells; i++) {
+        cells.push(spawnCell());
+      }
+    }
+
+    const sequence = document.getElementById("sequenceViewer");
+    const lines = [
+      "ATG CTT GGA TCA GTC TAG CTA GGA TTA",
+      "GCT AAG TTC GGA TGC TTA CGA TGG TAA",
+      "TCA GGA CTT AGC CTA GAC TTA GGA TGA",
+      "ACT GGA TTA CCA GTT GCA TTA GGA CTA"
+    ];
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeSequence() {
+      if (!sequence) return;
+      if (lineIndex >= lines.length) {
+        sequence.textContent = "";
+        lineIndex = 0;
+        charIndex = 0;
+      }
+      const current = lines[lineIndex];
+      sequence.textContent += current.charAt(charIndex);
+      charIndex++;
+      if (charIndex >= current.length) {
+        sequence.textContent += "\n";
+        lineIndex++;
+        charIndex = 0;
+      }
+      setTimeout(typeSequence, 40);
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    resize();
+    initCells();
+    animate();
+    typeSequence();
+    window.addEventListener("resize", () => {
+      resize();
+      initCells();
+    });
+  </script>
 </body>
 </html>
