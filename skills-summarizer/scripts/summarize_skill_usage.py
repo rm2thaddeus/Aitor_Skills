@@ -99,10 +99,22 @@ def derive_family(skill_name, description):
 
 
 def filter_entries(entries):
-    session_entries = [e for e in entries if e.get("source") == "codex_session_log"]
-    if session_entries:
-        return session_entries, "codex_session_log"
+    # Keep all sources (session-derived and manual). Filtering by source can drop
+    # important fallback logs, breaking the telemetry loop.
     return entries, "mixed"
+
+
+def filter_to_known_skills(entries, catalog):
+    known = set(catalog.keys())
+    kept = []
+    dropped_unknown_skill = 0
+    for entry in entries:
+        skill = entry.get("skill_name") or ""
+        if skill in known:
+            kept.append(entry)
+        else:
+            dropped_unknown_skill += 1
+    return kept, dropped_unknown_skill
 
 
 def summarize(entries, start_date, end_date, catalog):
@@ -184,6 +196,9 @@ def summarize(entries, start_date, end_date, catalog):
         "window_days": (end_date - start_date).days + 1,
         "totals": {
             "invocations": total,
+            "success": status_counts.get("success", 0),
+            "failure": status_counts.get("failure", 0),
+            "retries": status_counts.get("retries", 0),
             "status_counts": dict(status_counts),
             "unique_skills": len(skill_counts),
             "unique_projects": len(projects),
@@ -372,7 +387,11 @@ def main():
     entries, errors = load_entries(log_paths)
     entries, _ = filter_entries(entries)
     catalog = load_skill_catalog(args.skills_root)
+    entries, dropped_unknown_skill = filter_to_known_skills(entries, catalog)
     summary = summarize(entries, start_date, end_date, catalog)
+    summary["dropped_entries"] = {
+        "unknown_skill_name": dropped_unknown_skill,
+    }
 
     output_month = end_date.strftime("%Y-%m")
     output_dir = Path(args.output_root) / output_month

@@ -1,0 +1,762 @@
+{
+  "by_repo": [
+    {
+      "notes": [],
+      "project_repo_root": "unknown",
+      "skill_counts": {
+        "brainstorming": 11,
+        "file-operations": 2,
+        "file-organizer": 1,
+        "skills-summarizer": 1,
+        "systematic-debugging": 2,
+        "using-superpowers": 3
+      }
+    },
+    {
+      "notes": [],
+      "project_repo_root": "C:\\Users\\aitor\\.codex\\skills",
+      "skill_counts": {
+        "brainstorming": 2,
+        "git-pushing": 2,
+        "skills-summarizer": 1,
+        "skills-updater": 1,
+        "using-superpowers": 1
+      }
+    }
+  ],
+  "by_skill": [
+    {
+      "count": 13,
+      "skill_name": "brainstorming",
+      "success_rate": 1.0,
+      "top_notes": [
+        "auto: extracted from codex session logs",
+        "updated summarizer for session schema and displacement heuristic",
+        "documented long-running session edge case and checklist"
+      ]
+    },
+    {
+      "count": 4,
+      "skill_name": "using-superpowers",
+      "success_rate": 1.0,
+      "top_notes": [
+        "auto: extracted from codex session logs",
+        "manual: used to enforce skill invocation discipline"
+      ]
+    },
+    {
+      "count": 2,
+      "skill_name": "systematic-debugging",
+      "success_rate": 1.0,
+      "top_notes": [
+        "fixed migration and rewrite behavior for session-derived logs",
+        "auto: extracted from codex session logs"
+      ]
+    },
+    {
+      "count": 2,
+      "skill_name": "git-pushing",
+      "success_rate": 1.0,
+      "top_notes": [
+        "pushed session-derived schema changes",
+        "pushed extended skill usage summary"
+      ]
+    },
+    {
+      "count": 2,
+      "skill_name": "file-operations",
+      "success_rate": 1.0,
+      "top_notes": [
+        "auto: extracted from codex session logs"
+      ]
+    },
+    {
+      "count": 2,
+      "skill_name": "skills-summarizer",
+      "success_rate": 1.0,
+      "top_notes": [
+        "manual: ran backfill + 7-day summary",
+        "auto: extracted from codex session logs"
+      ]
+    },
+    {
+      "count": 1,
+      "skill_name": "file-organizer",
+      "success_rate": 1.0,
+      "top_notes": [
+        "auto: extracted from codex session logs"
+      ]
+    },
+    {
+      "count": 1,
+      "skill_name": "skills-updater",
+      "success_rate": 1.0,
+      "top_notes": [
+        "manual: applied approved upkeep fixes"
+      ]
+    }
+  ],
+  "candidate_actions": [],
+  "catalog": {
+    "total_skills": 88,
+    "unused_skills": 80,
+    "used_skills": 8
+  },
+  "dropped_entries": {
+    "unknown_skill_name": 2
+  },
+  "range": {
+    "days": 7,
+    "end_date": "2026-01-26",
+    "start_date": "2026-01-20"
+  },
+  "review_prompts": [
+    "Which top-used skills feel essential vs. replaceable?",
+    "Do any unused skills cover workflows you still expect to need?",
+    "Are there missing skills implied by repeated work patterns?",
+    "Which families should be merged or pruned next?"
+  ],
+  "summary_date": "2026-01-26",
+  "top_projects": [
+    {
+      "count": 20,
+      "project_repo_root": "unknown"
+    },
+    {
+      "count": 7,
+      "project_repo_root": "C:\\Users\\aitor\\.codex\\skills"
+    }
+  ],
+  "top_skills": [
+    {
+      "count": 13,
+      "skill_name": "brainstorming",
+      "status_counts": {
+        "success": 13
+      }
+    },
+    {
+      "count": 4,
+      "skill_name": "using-superpowers",
+      "status_counts": {
+        "success": 4
+      }
+    },
+    {
+      "count": 2,
+      "skill_name": "systematic-debugging",
+      "status_counts": {
+        "success": 2
+      }
+    },
+    {
+      "count": 2,
+      "skill_name": "git-pushing",
+      "status_counts": {
+        "success": 2
+      }
+    },
+    {
+      "count": 2,
+      "skill_name": "file-operations",
+      "status_counts": {
+        "success": 2
+      }
+    },
+    {
+      "count": 2,
+      "skill_name": "skills-summarizer",
+      "status_counts": {
+        "success": 2
+      }
+    },
+    {
+      "count": 1,
+      "skill_name": "file-organizer",
+      "status_counts": {
+        "success": 1
+      }
+    },
+    {
+      "count": 1,
+      "skill_name": "skills-updater",
+      "status_counts": {
+        "success": 1
+      }
+    }
+  ],
+  "totals": {
+    "failure": 0,
+    "invocations": 27,
+    "retries": 0,
+    "status_counts": {
+      "success": 27
+    },
+    "success": 27,
+    "unique_projects": 2,
+    "unique_skills": 8
+  },
+  "unused_skills": [
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "algorithmic",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "algorithmic-art"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "architecture",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "architecture-diagram-creator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "artifacts",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "artifacts-builder"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "brand",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "brand-guidelines"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "canvas",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "canvas-design"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "changelog",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "changelog-generator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "code",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "code-auditor"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "code",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "code-execution"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "code",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "code-refactor"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "code",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "code-transfer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "codebase",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "codebase-documenter"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "competitive",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "competitive-ads-extractor"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "connect",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "connect"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "connect",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "connect-apps"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "content",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "content-research-writer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "conversation",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "conversation-analyzer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "csv",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "csv-data-summarizer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "dashboard",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "dashboard-creator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "deep",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "deep-research"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "dev",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "dev-graph-exports"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "developer",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "developer-growth-analysis"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "dispatching",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "dispatching-parallel-agents"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "doc",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "doc-coauthoring"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "docker",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "docker-helper"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "comprehensive",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "docx"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "domain",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "domain-name-brainstormer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "ensemble",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "ensemble-solving"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "executing",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "executing-plans"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "feature",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "feature-planning"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "finishing",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "finishing-a-development-branch"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "flowchart",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "flowchart-creator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "frontend",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "frontend-design"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "image",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "image-enhancer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "|",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "imagen"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "internal",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "internal-comms"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "invoice",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "invoice-organizer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "langsmith",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "langsmith-fetch"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "lead",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "lead-research-assistant"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "convert",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "markitdown"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "mcp",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "mcp-builder"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "meeting",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "meeting-insights-analyzer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "paper",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "paper-2-web"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "comprehensive",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "pdf"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "pixel",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "pixel-detective-exports"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "execute",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "postgres"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "presentation",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "pptx"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "project",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "project-bootstrapper"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "raffle",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "raffle-winner-picker"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "receiving",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "receiving-code-review"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "best",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "remotion"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "requesting",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "requesting-code-review"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "review",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "review-implementing"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "rituals",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "rituals-guide"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "root",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "root-cause-tracing"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "scientific",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "scientific-visualization"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "skill",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "skill-creator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "skill",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "skill-installer"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "skill",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "skill-share"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "slack",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "slack-gif-creator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "sprint",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "sprint-perspectives"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "sprint",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "sprint-summary-pdf"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "start",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "start-dev-graph"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "start",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "start-pixel-detective"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "subagent",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "subagent-driven-development"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "tailored",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "tailored-resume-generator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "technical",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "technical-doc-creator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "template",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "template-skill"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "test",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "test-driven-development"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "test",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "test-fixing"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "theme",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "theme-factory"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "timeline",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "timeline-creator"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.9,
+      "family": "using",
+      "rationale": "unused in window; family usage rate 50%",
+      "skill_name": "using-git-worktrees"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "verification",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "verification-before-completion"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "video",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "video-downloader"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "web",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "web-artifacts-builder"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "webapp",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "webapp-testing"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "writing",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "writing-plans"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "writing",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "writing-skills"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "comprehensive",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "xlsx"
+    },
+    {
+      "days_since_last_use": null,
+      "displacement_probability": 0.95,
+      "family": "youtube",
+      "rationale": "unused in window; family usage rate 0%",
+      "skill_name": "youtube-transcript"
+    }
+  ],
+  "window_days": 7
+}
