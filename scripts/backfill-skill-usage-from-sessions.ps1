@@ -37,7 +37,7 @@ function Add-LogEntry($entry, [switch]$DryRun) {
   $entryJson = $entry | ConvertTo-Json -Compress
   $ts = [DateTime]::Parse($entry.timestamp).ToUniversalTime()
   $logFile = Get-LogPath -UtcTime $ts
-  $entryKey = "$($entry.timestamp)|$($entry.skill_name)"
+  $entryKey = "$($entry.session_id)|$($entry.timestamp)|$($entry.skill_name)"
   $dateKey = $ts.ToString('yyyy-MM-dd')
 
   if ($script:SeenKeys.ContainsKey($entryKey)) {
@@ -56,7 +56,12 @@ function Add-LogEntry($entry, [switch]$DryRun) {
     $existing = Get-Content -Path $logFile -ErrorAction SilentlyContinue
     $key = '"timestamp":"' + $entry.timestamp + '"'
     $nameKey = '"skill_name":"' + $entry.skill_name + '"'
-    if ($existing -match [regex]::Escape($key) -and $existing -match [regex]::Escape($nameKey)) {
+    $sessionKey = if ($entry.session_id) { '"session_id":"' + $entry.session_id + '"' } else { "" }
+    if (
+      $existing -match [regex]::Escape($key) -and
+      $existing -match [regex]::Escape($nameKey) -and
+      (-not $sessionKey -or $existing -match [regex]::Escape($sessionKey))
+    ) {
       return
     }
   }
@@ -76,7 +81,18 @@ function Extract-Skills([string]$text) {
   foreach ($m in $matches) {
     $skills += $m.Groups[1].Value
   }
-  return $skills
+
+  if (-not $script:KnownSkills) {
+    return $skills
+  }
+
+  $filtered = @()
+  foreach ($skill in $skills) {
+    if ($script:KnownSkills.Contains($skill)) {
+      $filtered += $skill
+    }
+  }
+  return $filtered
 }
 
 function Assert-SafeNotes([string]$notes) {
@@ -92,6 +108,18 @@ function Assert-SafeNotes([string]$notes) {
 $cutoff = (Get-Date).ToUniversalTime().AddDays(-$SinceDays)
 $script:SeenKeys = @{}
 $script:ClearedDates = @{}
+
+# Build a catalog of known skills so we don't log arbitrary backticked text.
+try {
+  $skillsRepoRoot = [IO.Path]::GetFullPath((Join-Path -Path $PSScriptRoot -ChildPath ".."))
+  $script:KnownSkills = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::OrdinalIgnoreCase)
+  Get-ChildItem -Path $skillsRepoRoot -Recurse -Filter "SKILL.md" -File -ErrorAction SilentlyContinue | ForEach-Object {
+    [void]$script:KnownSkills.Add($_.Directory.Name)
+  }
+} catch {
+  $script:KnownSkills = $null
+}
+
 $files = Get-ChildItem -Path $SessionsRoot -Recurse -Filter "rollout-*.jsonl" -File -ErrorAction SilentlyContinue |
   Where-Object { $_.Length -gt 0 -and $_.LastWriteTimeUtc -ge $cutoff }
 
@@ -141,9 +169,11 @@ foreach ($file in $files) {
     $notes = "auto: extracted from codex session logs"
     Assert-SafeNotes $notes
 
+    $timestamp = [DateTime]::Parse($obj.timestamp).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+
     foreach ($skill in $skills) {
       $entry = [ordered]@{
-        timestamp = $obj.timestamp
+        timestamp = $timestamp
         session_id = $sessionId
         event_index = $eventIndex
         skill_name = $skill
