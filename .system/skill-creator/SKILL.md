@@ -1,6 +1,7 @@
 ---
 name: skill-creator
-description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations.
+description: >-
+  Guide for creating and updating effective agent skills that extend Codex's capabilities with specialized knowledge, workflows, or tool integrations. Use when the user wants to create a new skill, update an existing skill, add a reusable capability, or says "create skill", "new skill", "update skill", "skill template".
 metadata:
   short-description: Create or update a skill
 ---
